@@ -44,7 +44,7 @@ def login_screen():
 
             if st.button("Login", key="login_btn", type="primary", use_container_width=True):
                 if not username.strip() or not password.strip():
-                    st.warning("⚠️ Username aur password dono required hain.")
+                    st.warning("⚠️Both username and password are required.")
                 else:
                     user = get_user(username.strip())
                     if not user:
@@ -70,11 +70,11 @@ def login_screen():
             if st.button("Create Account", key="register_btn", type="primary", use_container_width=True):
                 uname = new_username.strip()
                 if not uname or not new_password:
-                    st.warning("⚠️ Sab fields fill karo.")
+                    st.warning("⚠️fill Sab fields.")
                 elif new_password != confirm_pass:
-                    st.error("❌ Passwords match nahi karte.")
+                    st.error("❌ Passwords does not match")
                 elif len(new_password) < 4:
-                    st.warning("⚠️ Password kam se kam 4 characters ka hona chahiye.")
+                    st.warning("⚠️Minimum 4 characters required for Password.")
                 else:
                     existing = get_user(uname)
                     if existing:
@@ -82,7 +82,7 @@ def login_screen():
                     else:
                         ok = create_user(uname, hash_password(new_password), role="user")
                         if ok:
-                            st.success("✅ Account created! Ab login karo.")
+                            st.success("✅ Account created! Now login")
                         else:
                             st.error("❌ Registration failed. Try again.")
 

@@ -14,7 +14,7 @@ _SHARED = """
 
     .block-container {
         padding-top: 0.5rem !important;
-            }
+    }
 
     .stButton > button[kind="primary"] {
         background: #2D6A4F !important;
@@ -78,6 +78,46 @@ _HOME_BG = """
 """
 
 # ─────────────────────────────────────────────
+# HOME: glassmorphism panels, inputs, dividers
+# ─────────────────────────────────────────────
+_HOME_GLASS = """
+    .glass-panel {
+        background: rgba(255,255,255,0.06);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border: 1px solid rgba(255,255,255,0.14);
+        border-radius: 20px;
+        padding: 1.8rem 1.8rem 2.2rem 1.8rem;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+    }
+    .glass-panel h3 {
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        margin-top: 0 !important;
+    }
+    .glass-divider {
+        border-left: 1px solid rgba(255,255,255,0.12);
+        height: 100%;
+        min-height: 380px;
+        margin: 0 auto;
+        width: 1px;
+    }
+    .stSelectbox > div > div, .stTextInput > div > div > input {
+        background: rgba(255,255,255,0.07) !important;
+        border: 1px solid rgba(255,255,255,0.15) !important;
+        color: #ffffff !important;
+    }
+    .stButton > button[kind="primary"] {
+        background: rgba(45,106,79,0.55) !important;
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(72,202,228,0.4) !important;
+    }
+    .stButton > button[kind="primary"]:hover {
+        background: rgba(72,202,228,0.4) !important;
+    }
+"""
+
+# ─────────────────────────────────────────────
 # DASHBOARD: solid dark, NO image at all
 # ─────────────────────────────────────────────
 _DASH_BG = """
@@ -95,7 +135,7 @@ _DASH_BG = """
 
 
 def inject_home_styles():
-    st.markdown(f"<style>{_SHARED}{_HOME_BG}</style>", unsafe_allow_html=True)
+    st.markdown(f"<style>{_SHARED}{_HOME_BG}{_HOME_GLASS}</style>", unsafe_allow_html=True)
 
 
 def inject_dashboard_styles():

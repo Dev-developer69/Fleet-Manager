@@ -20,7 +20,7 @@ def main():
     if st.session_state["app_screen"] == "dashboard":
         vehicle_dashboard(st.session_state["selected_vehicle"])
     else:
-        inject_home_styles()   # home/entry screen — background wala
+        inject_home_styles()
         entry_screen()
 
 
@@ -29,7 +29,7 @@ def entry_screen():
     col_title, col_spacer, col_user, col_logout = st.columns([4, 2, 2, 1])
     with col_title:
         st.markdown(
-            "<h2 style='font-size:1.3rem;font-weight:700;margin:0.4rem 0;'>"
+            "<h2 style='font-size:1.3rem;font-weight:700;margin:0.4rem 0;color:#ffffff;'>"
             "🚌 Vehicle Management System</h2>",
             unsafe_allow_html=True,
         )
@@ -46,12 +46,10 @@ def entry_screen():
             unsafe_allow_html=True,
         )
     with col_logout:
-        st.markdown("<div style='padding-top:0.4rem;'>", unsafe_allow_html=True)
         if st.button("🚪 Logout", key="logout_btn", use_container_width=True):
             for k in list(st.session_state.keys()):
                 del st.session_state[k]
             st.rerun()
-        st.markdown("</div>", unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -60,11 +58,9 @@ def entry_screen():
     # ── LEFT: Select existing ──
     with col_left:
         st.markdown(
-            "<div style='background:rgba(10,12,18,0.7);border:1px solid rgba(255,255,255,0.1);"
-            "border-radius:16px;padding:1.5rem;backdrop-filter:blur(10px);'>",
+            "<div class='glass-panel'><h3>📋 Select Existing Vehicle</h3>",
             unsafe_allow_html=True,
         )
-        st.markdown("### 📋 Select Existing Vehicle")
 
         if "vehicles_list" not in st.session_state:
             st.session_state["vehicles_list"] = get_all_vehicles(
@@ -97,7 +93,6 @@ def entry_screen():
                 if st.button("🗑️ Delete", key="delete_vehicle_btn", use_container_width=True):
                     st.session_state["delete_confirm_vehicle"] = selected
 
-            # ── Confirm delete dialog ──
             if st.session_state.get("delete_confirm_vehicle") == selected:
                 st.warning(f"⚠️ Delete vehicle {selected} and all its related records")
                 c1, c2 = st.columns(2)
@@ -124,21 +119,16 @@ def entry_screen():
 
         st.markdown("</div>", unsafe_allow_html=True)
 
+    # ── DIVIDER ──
     with col_div:
-        st.markdown(
-            "<div style='border-left:1px solid rgba(255,255,255,0.1);"
-            "height:360px;margin:auto;width:1px;'></div>",
-            unsafe_allow_html=True,
-        )
+        st.markdown("<div class='glass-divider'></div>", unsafe_allow_html=True)
 
     # ── RIGHT: Add new ──
     with col_right:
         st.markdown(
-            "<div style='background:rgba(10,12,18,0.7);border:1px solid rgba(255,255,255,0.1);"
-            "border-radius:16px;padding:1.5rem;backdrop-filter:blur(10px);'>",
+            "<div class='glass-panel'><h3>➕ Add New Vehicle</h3>",
             unsafe_allow_html=True,
         )
-        st.markdown("### ➕ Add New Vehicle")
         st.markdown("<br>", unsafe_allow_html=True)
 
         new_number = st.text_input(
